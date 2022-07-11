@@ -1,7 +1,19 @@
 html{
-    max-width: 1000px;
+    max-width: 700px;
     background-color: aquamarine;
 }
+.scloor::-webkit-scrollbar{
+    width: 10px;
+    overflow: scroll;
+    height:0px;
+}
+.scloor::-webkit-scrollbar-track {
+    background: #0000ff;
+}
+.scloor::-webkit-scrollbar-thumb {
+  background: #ff0000;
+}
+
 
 .scloor{margin-top: 20px;
     padding-left: 14px;
@@ -10,8 +22,12 @@ html{
     width: 100%;
     overflow-x: auto;
     display: flex;
-    flex-direction: row;
+    flex-direction:column;
     background-color: yellow;
+}
+.ul2{
+    display: flex;
+    flex-direction: row;
 }
 
 .puro{
@@ -26,9 +42,17 @@ html{
 
 .rinkh{
     height: 300px;
+    margin-top: 50px;
 }
 
 .img2{
     height: 100px;
     width: 100px;
+}
+
+h2{
+    background-color: greenyellow;
+    width: 250px;
+    height: 50px;
+    text-align: center;
 }
