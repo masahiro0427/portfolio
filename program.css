@@ -71,6 +71,7 @@ h2{
 .ul3{
     display: flex;
     flex-direction: row-reverse;
+    margin-left: 0;
 }
 
 .puro{
