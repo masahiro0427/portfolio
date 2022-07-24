@@ -45,9 +45,9 @@
                 <ul>
                     <h3>チャレンジ2-1</h3>
                     <p class="rinkh">
-                        #include <iostream><br>
+                        #include &lt;iostream><br>
                         // OpenCV用のヘッダファイル<br>
-                        #include <opencv2/opencv.hpp><br>
+                        #include &lt;opencv2/opencv.hpp><br>
                         <br>
                         //画像ファイル (サイズは小さめが良い)<br>
                         #define FILE_NAME "./aquarium.jpg"<br>
@@ -64,9 +64,9 @@
                             }<br>
                             <br>
                             cv::Mat dst_img = cv::Mat(src_img.size(),CV_8UC3); //画像の表示<br>
-                            for(y=0;y<src_img.rows;y++){<br>
-                                for(x=0;x<src_img.cols;x++){<br>
-                                    cv::Vec3b s=src_img.at<cv::Vec3b>(y,x);<br>
+                            for(y=0;y&lt;src_img.rows;y++){<br>
+                                for(x=0;x&lt;src_img.cols;x++){<br>
+                                    cv::Vec3b s=src_img.at&lt;cv::Vec3b>(y,x);<br>
                                     if(s[0]>=100){<br>
                                         s[0]=0;<br>
                                         s[1]=0;<br>
@@ -76,7 +76,7 @@
                                         s[1]=s[1];<br>
                                         s[2]=s[2];<br>
                                     }<br>
-                                    dst_img.at<cv::Vec3b>(y,x)=s;<br>
+                                    dst_img.at&lt;cv::Vec3b>(y,x)=s;<br>
                                 }<br>
                             }<br>
                             cv::imshow(WINDOW_NAME_INPUT,src_img);<br>
