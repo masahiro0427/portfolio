@@ -23,7 +23,7 @@ html{
     flex-direction: row;
 }
 #menu-btn-check:checked ~ .menu::after {
-    height: 300px;
+    height: 200px;
 }
 .menu2{
     display: flex;
