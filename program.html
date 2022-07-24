@@ -189,10 +189,86 @@
                         </p>
                 </ul>
             </ul>
-            <ul class="ul3">
+            <ul class="ul3 left">
                 <ul>
-                    <h3>前期４</h3>
-                    <p>test</p>
+                    <h3>チャレンジ５−２</h3>
+                    <p>
+                        #include &lt;iostream><br>
+                        // OpenCV用のヘッダファイル<br>
+                        #include &lt;opencv2/opencv.hpp><br>
+                        <br>
+                        #define FILE_NAME "../Debug/dot_gray_rectangle.jpg"<br>
+                        #define WINDOW_NAME_INPUT "input"<br>
+                        #define WINDOW_NAME_OUTPUT "output"<br>
+                        #define COLOR_NUM (256)<br>
+                        #define FILTER_SIZE (15)<br>
+                        <br>
+                        int main(int argc, const char * argv[]) {<br>
+                            //画像の入力<br>
+                            cv::Mat src_img = cv::imread(FILE_NAME,0); //画像の読み込み<br>
+                            if (src_img.empty()) { //入力失敗の場合<br>
+                                fprintf(stderr, "File is not opened.\n");<br>
+                                return (-1);<br>
+                            }<br>
+                            cv::Mat dst_img;<br>
+                            <br>
+                            int F=FILTER_SIZE*FILTER_SIZE;<br>
+                            <br>
+                            double filter_h[F];<br>
+                            <br>
+                            for(int i=0;i&lt;F;i++){<br>
+                                filter_h[i]=1./49.;<br>
+                            }<br>
+                            <br>
+                            //配列をフィルタ行列kernelに変換<br>
+                            cv::Mat kernel=cv::Mat(FILTER_SIZE,FILTER_SIZE,CV_32F,filter_h);<br>
+                            //正規化<br>
+                            cv::normalize(kernel,kernel,1.0,0.0,cv::NORM_L1);<br>
+                            //フィルタの計算<br>
+                            cv::filter2D(src_img,dst_img,-1,kernel);<br>
+                            <br>
+                            int i,x,y;<br>
+                            /*int hist[COLOR_NUM];<br>
+                            <br>
+                            for(i=0;i&lt;COLOR_NUM;i++){<br>
+                                hist[i]=0;<br>
+                            }<br>
+                            <br>
+                            for(y=0;y&lt;dst_img.rows;y++){<br>
+                                for(x=0;x&lt;dst_img.cols;x++){<br>
+                                    unsigned char s=dst_img.at&lt;unsigned char>(y,x);<br>
+                                    hist[(int)s]++;<br>
+                                }<br>
+                            }<br>
+                            <br>
+                            for(i=0;i&lt;COLOR_NUM;i++){<br>
+                                printf("%d=%d\n",i,hist[i]);<br>
+                            }*/<br>
+                            <br>
+                            uchar lut[COLOR_NUM];<br>
+                            for(int i=0;&lt;COLOR_NUM;i++){<br>
+                                if(i&lt;=64){<br>
+                                    lut[i]=255;<br>
+                                }else{<br>
+                                    lut[i]=0;<br>
+                                }<br>
+                            }<br>
+                            <br>
+                            for(int y=0;y&lt;dst_img.rows;y++){<br>
+                                for(int x=0;x&lt;dst_img.cols;x++){<br>
+                                    uchar s=dst_img.at&lt;uchar>(y,x);<br>
+                                    dst_img.at&lt;uchar>(y,x)=lut[s];<br>
+                                }<br>
+                            }<br>
+                            <br>
+                            cv::imshow(WINDOW_NAME_INPUT,src_img);<br>
+                            cv::imshow(WINDOW_NAME_OUTPUT,dst_img);<br>
+                            <br>
+                            cv::waitKey();<br>
+                            <br>
+                            return 0;<br>
+                        }<br>
+                    </p>
                 </ul>
             </ul><ul class="ul2">
                 <ul>
