@@ -99,7 +99,9 @@ h2{
     margin-left: 0;
     margin-bottom: 250px;
 }
-
+.spe{
+    height: 30px;
+}
 .puro{
     display: flex;
     flex-direction: row;
