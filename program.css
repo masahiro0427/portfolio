@@ -91,7 +91,7 @@ h2{
     margin-bottom: 250px;
 }
 .left{
-    left:-100px;
+    margin-left:-100px;
 }
 .ul3{
     display: flex;
