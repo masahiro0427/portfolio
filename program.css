@@ -103,6 +103,7 @@ h2{
 .puro{
     display: flex;
     flex-direction: row;
+    padding: 3px;
 }
 
 .img{
