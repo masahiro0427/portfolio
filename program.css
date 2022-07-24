@@ -92,6 +92,7 @@ h2{
 .ul2{
     display: flex;
     flex-direction: row;
+    height: 250px;
 }
 .ul3{
     display: flex;
