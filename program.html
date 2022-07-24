@@ -131,7 +131,7 @@
             </ul>
             <ul class="ul2">
                 <ul>
-                    <h3>チャレンジ３−２</h3>
+                    <h3>チャレンジ３</h3>
                     <p class="scloor2">#include &lt;iostream><br>
                         // OpenCV用のヘッダファイル<br>
                         #include &lt;opencv2/opencv.hpp><br>
@@ -191,7 +191,7 @@
             </ul>
             <ul class="ul3">
                 <ul>
-                    <h3>チャレンジ５−２</h3>
+                    <h3>チャレンジ５</h3>
                     <p class="scloor2 left">
                         #include &lt;iostream><br>
                         // OpenCV用のヘッダファイル<br>
@@ -270,16 +270,94 @@
                         }<br>
                     </p>
                 </ul>
-            </ul><ul class="ul2">
+            </ul>
+            <ul class="ul2">
                 <ul>
-                    <h3>前期５</h3>
-                    <p>test</p>
+                    <h3>チャレンジ６</h3>
+                    <p class="scloor2">
+                        #include &lt;iostream><br>
+                        // OpenCV用のヘッダファイル<br>
+                        #include &lt;opencv2/opencv.hpp><br>
+                        <br>
+                        //画像ファイル (サイズは小さめが良い)<br>
+                        #define FILE_NAME "../Debug/06_02_input_x21047.jpg"<br>
+                        #define WINDOW_NAME_INPUT "input"<br>
+                        #define WINDOW_NAME_OUTPUT "output"<br>
+                        //#define WINDOW_NAME_OUTPUT1 "output1"<br>
+                        //#define WINDOW_NAME_OUTPUT2 "output2"<br>
+                        #define COLOR_NUM (256)<br>
+                        <br>
+                        int main(int argc, const char * argv[]) {<br>
+                            //画像の入力<br>
+                            cv::Mat src_img = cv::imread(FILE_NAME,cv::IMREAD_GRAYSCALE); //画像の読み込み<br>
+                            if (src_img.empty()) { //入力失敗の場合<br>
+                                fprintf(stderr, "File is not opened.\n");<br>
+                                return (-1);<br>
+                            }<br>
+                            cv::Mat dst_img;<br>
+                            cv::Mat H_img;<br>
+                            cv::Mat V_img;<br>
+                            //cv::Mat B_img;<br>
+                            //cv::Mat C_img;<br>
+                            cv::Mat tmp_img;<br>
+                            //フィルタa<br>
+                            double filter_h[]= {0.,0.,0.,<br>
+                                                -1.,0.,1.,<br>
+                                                0.,0.,0.};<br>
+                            //配列をフィルタ行列kernelに変換<br>
+                            cv::Mat kernel1=cv::Mat(3,3,CV_64FC1,filter_h);<br>
+                            //正規化<br>
+                            cv::normalize(kernel1,kernel1,1.0,0.0,cv::NORM_L1);<br>
+                            //フィルタの計算<br>
+                            <br>
+                            cv::filter2D(src_img,H_img,CV_64FC1,kernel1);<br>
+                            <br>
+                            //cv::convertScaleAbs(H_img,B_img);<br>
+                            <br>
+                            double filter_j[]= {0.,-1.,0.,<br>
+                                                0.,0.,0.,<br>
+                                                0.,1.,0.};<br>
+                            //配列をフィルタ行列kernelに変換<br>
+                            cv::Mat kernel2=cv::Mat(3,3,CV_64FC1,filter_j);<br>
+                            //正規化<br>
+                            cv::normalize(kernel2,kernel2,1.0,0.0,cv::NORM_L1);<br>
+                            //フィルタの計算<br>
+                            <br>
+                            cv::filter2D(src_img,V_img,CV_64FC1,kernel2);<br>
+                            <br>
+                            //cv::convertScaleAbs(V_img,C_img);<br>
+                            <br>
+                            cv::Mat G_img=cv::Mat(V_img.size(),CV_64FC1);<br>
+                            double h,v;<br>
+                            int x,y;<br>
+                            <br>
+                            for(y=0;y&lt;src_img.rows;y++){<br>
+                                for(x=0;x&lt;src_img.cols;x++){<br>
+                                    h=H_img.at&lt;double_t>(y,x);<br>
+                                    v=V_img.at&lt;double_t>(y,x);<br>
+                                    uchar s=sqrt(h*h+v*v);<br>
+                                    G_img.at&lt;double_t>(y,x)=s;<br>
+                                }<br>
+                            }<br>
+                            <br>
+                            cv::convertScaleAbs(G_img,dst_img);<br>
+                            <br>
+                            cv::imshow(WINDOW_NAME_INPUT,src_img);<br>
+                            //cv::imshow(WINDOW_NAME_OUTPUT1,B_img);<br>
+                            //cv::imshow(WINDOW_NAME_OUTPUT2,C_img);<br>
+                            cv::imshow(WINDOW_NAME_OUTPUT,dst_img);<br>
+                            <br>
+                            cv::waitKey();<br>
+                            <br>
+                            return 0;<br>
+                        }<br>
+                        </p>
                 </ul>
             </ul>
             <ul class="ul3">
                 <ul>
                     <h3>前期６</h3>
-                    <p>test</p>
+                    <p class="scloor left">test</p>
                 </ul>
             </ul>
             <ul class="ul2">
