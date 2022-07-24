@@ -356,14 +356,73 @@
             </ul>
             <ul class="ul3">
                 <ul>
-                    <h3>前期６</h3>
-                    <p class="scloor left">test</p>
+                    <h3>チャレンジ８</h3>
+                    <p class="scloor2 left">
+                        #include &lt;iostream><br>
+                        // OpenCV用のヘッダファイル<br>
+                        #include &lt;opencv2/opencv.hpp><br>
+                        <br>
+                        //画像ファイル (サイズは小さめが良い)<br>
+                        #define FILE_NAME "../Debug/red_green_rectangle.jpg"<br>
+                        #define WINDOW_NAME_INPUT "input"<br>
+                        #define WINDOW_NAME_OUTPUT1 "output1"<br>
+                        #define WINDOW_NAME_OUTPUT2 "output2"<br>
+                        #define THRESHOLD (156)<br>
+                        #define THRESHOLD1 (136)<br>
+                        #define THRESHOLD2 (100)<br>
+                        #define FILER_SIZE (3)<br>
+                        <br>
+                        int main(int argc, const char * argv[]) {<br>
+                            //画像の入力<br>
+                            cv::Mat src_img = cv::imread(FILE_NAME);<br>
+                            if (src_img.empty() || src_img.empty()) { //入力失敗の場合<br>
+                                fprintf(stderr, "File is not opened.\n");<br>
+                                return (-1);<br>
+                            }<br>
+                            //画像の置き場所設定<br>
+                            cv::Mat result_img = cv::Mat(src_img.size(),CV_8UC1);<br>
+                            cv::Mat sub_img = cv::Mat(src_img.size(),CV_8UC1);<br>
+                            int x,y;<br>
+                            //メディアンフォルダ設定<br>
+                            cv::Mat median_img;<br>
+                            cv::medianBlur(src_img,median_img,FILER_SIZE);<br>
+                            //画像から特定の色の摘出<br>
+                            for(y=0;y&lt;median_img.rows;y++){<br>
+                                for(x=0;x&lt;median_img.cols;x++){<br>
+                                    cv::Vec3b s1 = median_img.at&lt;cv::Vec3b>(y,x);<br>
+                                    //緑色の摘出<br>
+                                    uchar t;<br>
+                                    if(s1[1]>=THRESHOLD && s1[2]&lt;THRESHOLD){<br>
+                                        t=255;<br>
+                                    }else{<br>
+                                        t=0;<br>
+                                    }<br>
+                                    result_img.at&lt;uchar>(y,x)= t;<br>
+                                    //赤色の摘出<br>
+                                    uchar u;<br>
+                                    if(s1[2]>=THRESHOLD && s1[1]&lt;THRESHOLD2){<br>
+                                        u=255;<br>
+                                    }else{<br>
+                                        u=0;<br>
+                                    }<br>
+                                    sub_img.at&lt;uchar>(y,x)= u;<br>
+                                }<br>
+                            }<br>
+                            //画像の出力<br>
+                            cv::imshow(WINDOW_NAME_INPUT,src_img);<br>
+                            cv::imshow(WINDOW_NAME_OUTPUT1,result_img);<br>
+                            cv::imshow(WINDOW_NAME_OUTPUT2,sub_img);<br>
+                            cv::waitKey();<br>
+                            <br>
+                            return 0;<br>
+                        }<br>
+                    </p>
                 </ul>
             </ul>
             <ul class="ul2">
                 <ul>
                     <h3>前期７</h3>
-                    <p>test</p>
+                    <p class="scloor2">test</p>
                 </ul>
             </ul>
             <ul class="ul3">
