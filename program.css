@@ -147,7 +147,7 @@ h2{
 }
 
 #menu-btn-check {
-    display: none;
+    /*display: none;*/
     z-index: 10000;
 }
 .menu-content {
