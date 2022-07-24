@@ -90,8 +90,43 @@
             </ul>
             <ul class="ul3">
                 <ul>
-                    <h3>前期２</h3>
-                    <p>test</p>
+                    <h3>チャレンジ２−２</h3>
+                    <p class="scloor2">
+                        #include &lt;iostream><br>
+                        // OpenCV用のヘッダファイル<br>
+                        #include &lt;opencv2/opencv.hpp><br>
+                        <br>
+                        //画像ファイル (サイズは小さめが良い)<br>
+                        #define FILE_NAME "./aquarium.jpg"<br>
+                        #define WINDOW_NAME_INPUT "input"<br>
+                        #define WINDOW_NAME_OUTPUT "output"<br>
+                        <br>
+                        int main(int argc, const char * argv[]) {<br>
+                            int x,y,c=0,z=0;<br>
+                            //画像の入力<br>
+                            cv::Mat src_img = cv::imread(FILE_NAME); //画像の読み込み<br>
+                            if (src_img.empty()) { //入力失敗の場合<br>
+                                fprintf(stderr, "読み込み失敗\n");<br>
+                                return (-1);<br>
+                            }<br>
+                            <br>
+                            cv::Mat dst_img = cv::Mat(src_img.size(),CV_8UC3); //画像の表示<br>
+                            for(y=0;y&lt;src_img.rows;y++){<br>
+                                for(x=0;x&lt;src_img.cols;x++){<br>
+                                    cv::Vec3b s=src_img.at&lt;cv::Vec3b>(y,x);<br>
+                                    if(s[0]>=100){<br>
+                                        c++;<br>
+                                    }<br>
+                                    z++;<br>
+                                    dst_img.at&lt;cv::Vec3b>(y,x)=s;<br>
+                                }<br>
+                            }<br>
+                            printf("%f\n",(double)c/z*100);<br>
+                            cv::waitKey(1); //キー入力待ち (止める)<br>
+                            <br>
+                            return 0;<br>
+                        }<br>
+                        </p>
                 </ul>
             </ul>
             <ul class="ul2">
