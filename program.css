@@ -54,6 +54,7 @@ h2{
     width: 650px;
     margin-left: 15px;
     margin-right: 15px;
+    margin-bottom: 100px;
     overflow-x: auto;
     display: flex;
     flex-direction:column;
