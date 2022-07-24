@@ -18,6 +18,7 @@ html{
     width: 720px;
     margin-left: -10px;
     margin-top: -10px;
+    background-color:red;
     display: flex;
     flex-direction: row;
 }
